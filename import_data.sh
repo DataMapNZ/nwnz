@@ -105,7 +105,7 @@ $run_query "
               CONSTRAINT ${SCHEMA}_observations_pkey PRIMARY KEY (id)
             );"
 
-$run_query "COPY ${SCHEMA}.observations FROM STDIN WITH CSV HEADER" < $OBSERVATIONS_FILE
+sed 's/,"",/,,/g' $OBSERVATIONS_FILE | $run_query "COPY ${SCHEMA}.observations FROM STDIN WITH CSV HEADER"
 
 
 
